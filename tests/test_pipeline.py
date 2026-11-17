@@ -87,3 +87,4 @@ def test_end_to_end_graph_execution():
     assert result["final_report"] is not None
     assert result["triage_level"] in (TriageLevel.RED, TriageLevel.YELLOW, TriageLevel.GREEN)
     assert len(result["audit_trail"]) >= 4
+

@@ -31,3 +31,4 @@ class TriageEngine:
             return TriageLevel.YELLOW
 
         return TriageLevel.GREEN
+

@@ -136,3 +136,4 @@ When working on your respective module, **do not modify files in other members' 
 - **Padmini:** Focus on `aegis/evaluation/`. Enhance the prompt engineering, guidelines check, and FHIR export in your critic and report tools.
 - **Ariba:** Focus on `aegis/orchestrator/`. Manage graph nodes, cyclic conditions, memory persistence, and system-wide integration.
 - **Contracts (`aegis/contracts/`):** Universal schemas agreed upon by the entire team. Any changes must be coordinated.
+

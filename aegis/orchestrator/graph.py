@@ -60,3 +60,4 @@ def get_compiled_orchestrator():
     """Returns the compiled, runnable LangGraph application."""
     workflow = build_aegis_graph()
     return workflow.compile()
+

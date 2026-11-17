@@ -51,3 +51,4 @@ class VisionAgent:
             raw_summary=observation_text,
             execution_time_ms=(time.time() - start_time) * 1000
         )
+

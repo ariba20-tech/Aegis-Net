@@ -72,3 +72,4 @@ class ReportGenerator:
             fhir_bundle=fhir_bundle,
             audit_trace_id=trace_id
         )
+

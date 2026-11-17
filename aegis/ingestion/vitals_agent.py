@@ -55,3 +55,4 @@ class VitalsAgent:
             raw_summary=summary,
             execution_time_ms=(time.time() - start_time) * 1000
         )
+

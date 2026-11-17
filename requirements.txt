@@ -7,3 +7,4 @@ langchain-core>=0.3.0
 # opencv-python      # (Already installed for Sanjoli's Vision processing)
 # torch              # (Already installed for neural inference)
 # pandas             # (Already installed for EHR/Vitals time-series)
+

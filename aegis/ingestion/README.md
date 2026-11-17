@@ -48,3 +48,4 @@ report = AgentFindingReport(
 - `ehr_agent.py`: Clinical NLP pipeline for extracting entities, relations, and negation.
 - `vitals_agent.py`: Time-series anomaly detection and signal processing for ECG / SpO₂.
 - `fhir_normalizer.py`: Units normalization (e.g. mg/dL vs mmol/L) and FHIR observation alignment.
+

@@ -50,3 +50,4 @@ class FinalClinicalReport(BaseModel):
     critic_verdict: DoctorCriticVerdict
     fhir_bundle: Dict[str, Any] = Field(default_factory=dict)
     audit_trace_id: str
+

@@ -39,3 +39,4 @@ class EncounterMemory:
             "total_passes": len(self.history),
             "pass_history": self.history
         }
+

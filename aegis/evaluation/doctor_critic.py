@@ -66,3 +66,4 @@ class DoctorCritic:
             needs_retry=False,
             retry_guidance=None
         )
+

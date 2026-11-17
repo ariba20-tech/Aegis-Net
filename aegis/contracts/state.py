@@ -53,3 +53,4 @@ class EncounterState(TypedDict):
     
     # Audit Trail (Traceability log)
     audit_trail: Annotated[List[Dict[str, Any]], operator.add]
+

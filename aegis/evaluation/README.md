@@ -45,3 +45,4 @@ verdict = DoctorCriticVerdict(
 - `triage.py`: Deterministic and learned clinical triage classification (RED / YELLOW / GREEN).
 - `report_generator.py`: Attending physician report and FHIR bundle builder.
 - `audit_logger.py`: Encounter traceability and structured audit logging.
+

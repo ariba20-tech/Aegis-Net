@@ -183,3 +183,4 @@ def reporting_node(state: EncounterState) -> Dict[str, Any]:
         "final_report": report,
         "audit_trail": [audit_entry]
     }
+

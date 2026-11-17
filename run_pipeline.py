@@ -1,43 +1,47 @@
 """
 AEGIS-NET End-to-End Orchestration Runner
-Demonstrates the cyclic multi-agent execution pipeline.
+Demonstrates the cyclic multi-agent execution pipeline across benchmark encounters.
 Executed by: Ariba Hurrain Hussain (Orchestration & Integration)
 """
 
 import json
+import os
+import sys
 from aegis.orchestrator.graph import get_compiled_orchestrator
 from aegis.contracts.state import EncounterState
 
 
-def run_sample_encounter():
+def load_benchmark_encounters():
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "sample_encounters.json")
+    if os.path.exists(path):
+        with open(path, "r") as f:
+            return json.load(f)
+    return []
+
+
+def run_encounter(case_index: int = 0):
     print("=" * 70)
     print("🏥 AEGIS-NET: Clinical Multimodal Multi-Agent System")
     print("=" * 70)
 
-    # Compile Ariba's LangGraph orchestrator
-    print("[1/4] Compiling Central LangGraph Orchestrator...")
+    cases = load_benchmark_encounters()
+    if not cases:
+        print("[!] No benchmark cases found in data/sample_encounters.json. Using fallback.")
+        return
+
+    case = cases[case_index % len(cases)]
+    print(f"\n[Case {case_index + 1}/{len(cases)}]: {case['clinical_scenario']}")
+    print(f"Patient ID: {case['patient_id']} | Expected Triage: {case['expected_triage']}")
+
+    print("\n[1/3] Compiling Central LangGraph Orchestrator...")
     app = get_compiled_orchestrator()
 
-    # Synthetic clinical encounter with multimodal data
     initial_state: EncounterState = {
-        "patient_id": "PT-2026-9812",
-        "encounter_id": "ENC-ED-4401",
+        "patient_id": case["patient_id"],
+        "encounter_id": case["encounter_id"],
         "iteration": 1,
         "max_retries": 2,
-        "raw_inputs": {
-            "image": "dicom/chest_cxr_pt9812.dcm",
-            "ehr": (
-                "67-year-old male presenting with acute fever (102.1 F), productive cough with purulent sputum, "
-                "pleuritic chest pain, and progressive shortness of breath for 3 days. History of mild COPD."
-            ),
-            "vitals": {
-                "heart_rate": 112,
-                "blood_pressure": "138/84",
-                "respiratory_rate": 25,
-                "spo2_percent": 89,
-                "temperature_f": 102.1
-            }
-        },
+        "raw_inputs": case["raw_inputs"],
         "encounter_context": {},
         "agent_reports": [],
         "accumulated_findings": [],
@@ -50,14 +54,12 @@ def run_sample_encounter():
         "audit_trail": []
     }
 
-    print("\n[2/4] Executing Workflow over Multimodal Encounter...")
+    print("[2/3] Executing Workflow over Multimodal Encounter...")
     final_output = app.invoke(initial_state)
 
-    print("\n[3/4] Workflow Execution Completed Successfully!")
+    print("\n[3/3] Workflow Execution Completed Successfully!")
     print(f"-> Total Iterations Run: {final_output['iteration']}")
-    print(f"-> Audit Trail Steps Recorded: {len(final_output['audit_trail'])}")
-    for log in final_output['audit_trail']:
-        print(f"   [{log['timestamp']}] Node: {log['step']}")
+    print(f"-> Audit Trail Steps:    {len(final_output['audit_trail'])}")
 
     report = final_output.get("final_report")
     if report:
@@ -66,7 +68,7 @@ def run_sample_encounter():
         print("=" * 70)
         print(f"Patient ID:     {report.patient_id}")
         print(f"Encounter ID:   {report.encounter_id}")
-        print(f"Triage Level:   🚨 [{report.triage.value}]")
+        print(f"Triage Level:   🚨 [{report.triage.value}] (Expected: {case['expected_triage']})")
         print(f"Audit Trace ID: {report.audit_trace_id}")
         print("\n🩺 Synthesized Clinical Diagnoses:")
         for diag in report.synthesized_diagnosis:
@@ -93,4 +95,7 @@ def run_sample_encounter():
 
 
 if __name__ == "__main__":
-    run_sample_encounter()
+    idx = 0
+    if len(sys.argv) > 1 and sys.argv[1].isdigit():
+        idx = int(sys.argv[1])
+    run_encounter(idx)

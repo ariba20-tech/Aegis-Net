@@ -19,3 +19,4 @@ class AuditLogger:
             "step": step_name,
             "data": payload
         }
+

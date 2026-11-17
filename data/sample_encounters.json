@@ -1,0 +1,118 @@
+[
+  {
+    "patient_id": "PT-RESP-1001",
+    "encounter_id": "ENC-ED-2026-01",
+    "demographics": {
+      "age": 68,
+      "gender": "M",
+      "chief_complaint": "Acute dyspnea, high fever, productive cough"
+    },
+    "expected_triage": "RED",
+    "clinical_scenario": "Community-Acquired Bacterial Pneumonia with Severe Hypoxemic Respiratory Failure",
+    "raw_inputs": {
+      "image": "data/mock/images/cxr_consolidation_rll.png",
+      "image_metadata": {
+        "view": "PA",
+        "modality": "DX",
+        "ground_truth_findings": ["Right lower lobe airspace consolidation", "Air bronchograms", "No pleural effusion"]
+      },
+      "ehr": "Patient is a 68-year-old male with a history of hypertension and mild COPD who presents to the emergency department with acute onset of fever (102.4°F), chills, and productive cough with rust-colored sputum for 4 days. Dyspnea worsened significantly this morning. Labs: WBC 16.2 x10^3/uL (86% neutrophils, 8% bands). Procalcitonin elevated at 2.4 ng/mL. Serum lactate: 2.1 mmol/L.",
+      "vitals": {
+        "heart_rate": 118,
+        "blood_pressure_systolic": 105,
+        "blood_pressure_diastolic": 64,
+        "respiratory_rate": 28,
+        "spo2_percent": 88,
+        "temperature_c": 39.1,
+        "o2_device": "Room Air"
+      }
+    }
+  },
+  {
+    "patient_id": "PT-CARD-1002",
+    "encounter_id": "ENC-ED-2026-02",
+    "demographics": {
+      "age": 54,
+      "gender": "F",
+      "chief_complaint": "Sudden pleuritic chest pain and shortness of breath after 14-hour flight"
+    },
+    "expected_triage": "RED",
+    "clinical_scenario": "Acute Pulmonary Embolism (Conflict / Debate Case: Clear CXR with profound hypoxia and sinus tachycardia)",
+    "raw_inputs": {
+      "image": "data/mock/images/cxr_normal_lungs.png",
+      "image_metadata": {
+        "view": "AP",
+        "modality": "DX",
+        "ground_truth_findings": ["Clear lung fields bilaterally", "Normal cardiothoracic ratio", "No focal infiltrate or pneumothorax"]
+      },
+      "ehr": "54-year-old female presents with sudden sharp right-sided pleuritic chest pain and breathlessness. Returned from international flight 48 hours ago. Past medical history: Oral contraceptive use, mild obesity. D-dimer markedly elevated at 3,200 ng/mL FEU. Troponin T mildly elevated at 0.04 ng/mL.",
+      "vitals": {
+        "heart_rate": 126,
+        "blood_pressure_systolic": 96,
+        "blood_pressure_diastolic": 60,
+        "respiratory_rate": 26,
+        "spo2_percent": 89,
+        "temperature_c": 37.1,
+        "o2_device": "Room Air"
+      }
+    }
+  },
+  {
+    "patient_id": "PT-COPD-1003",
+    "encounter_id": "ENC-ED-2026-03",
+    "demographics": {
+      "age": 72,
+      "gender": "M",
+      "chief_complaint": "Increased wheezing and increased inhaler usage for 3 days"
+    },
+    "expected_triage": "YELLOW",
+    "clinical_scenario": "Moderate Acute Exacerbation of COPD without Acute Pneumonia",
+    "raw_inputs": {
+      "image": "data/mock/images/cxr_hyperinflation.png",
+      "image_metadata": {
+        "view": "PA",
+        "modality": "DX",
+        "ground_truth_findings": ["Bilateral hyperinflation", "Flattening of hemidiaphragms", "No acute focal infiltrate"]
+      },
+      "ehr": "72-year-old male with 45 pack-year smoking history and Gold Stage II COPD reports increased cough, clear sputum volume, and expiratory wheezing triggered by seasonal cold. Has been using albuterol every 2 hours with partial relief. Afebrile. WBC 9.1 x10^3/uL (normal). CRP mildly elevated at 8 mg/L.",
+      "vitals": {
+        "heart_rate": 96,
+        "blood_pressure_systolic": 142,
+        "blood_pressure_diastolic": 86,
+        "respiratory_rate": 21,
+        "spo2_percent": 93,
+        "temperature_c": 37.0,
+        "o2_device": "Room Air (Baseline 92-94%)"
+      }
+    }
+  },
+  {
+    "patient_id": "PT-OUTP-1004",
+    "encounter_id": "ENC-ED-2026-04",
+    "demographics": {
+      "age": 29,
+      "gender": "F",
+      "chief_complaint": "Mild viral upper respiratory symptoms and dry cough"
+    },
+    "expected_triage": "GREEN",
+    "clinical_scenario": "Mild Viral Bronchitis / Outpatient Illness",
+    "raw_inputs": {
+      "image": "data/mock/images/cxr_normal.png",
+      "image_metadata": {
+        "view": "PA",
+        "modality": "DX",
+        "ground_truth_findings": ["Clear lung fields", "Normal cardiac silhouette"]
+      },
+      "ehr": "29-year-old healthy female with 2-day history of scratchy throat, nasal congestion, and mild non-productive cough. No dyspnea, no chest pain. Denies known sick contacts. Vitals stable. Physical exam reveals clear breath sounds bilaterally with no crackles or wheezes.",
+      "vitals": {
+        "heart_rate": 74,
+        "blood_pressure_systolic": 118,
+        "blood_pressure_diastolic": 76,
+        "respiratory_rate": 16,
+        "spo2_percent": 99,
+        "temperature_c": 37.2,
+        "o2_device": "Room Air"
+      }
+    }
+  }
+]

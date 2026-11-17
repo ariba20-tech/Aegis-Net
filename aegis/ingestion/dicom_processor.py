@@ -27,3 +27,4 @@ class DicomProcessor:
             "window_width": 400,
             "processed": True
         }
+

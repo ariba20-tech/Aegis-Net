@@ -45,3 +45,4 @@ class AgentFindingReport(BaseModel):
     findings: List[ClinicalFinding] = Field(default_factory=list)
     raw_summary: str = Field(..., description="High-level text summary from the agent")
     execution_time_ms: Optional[float] = None
+
