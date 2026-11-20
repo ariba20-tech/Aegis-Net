@@ -36,4 +36,5 @@ wheels/
 audit_logs/
 temp/
 .cache/
+data/raw/
 

@@ -1,75 +1,50 @@
-# 📚 AEGIS-NET Dataset & Benchmark Guide
+# 📚 AEGIS-NET: Free & Zero-Cost Dataset Guide
 
-This document outlines the clinical datasets used for training, benchmarking, and evaluating AEGIS-NET across **Vision (Sanjoli)**, **EHR / Clinical NLP (Sanjoli)**, **Time-Series Vitals (Sanjoli)**, and **Doctor-Critic & Triage (Ariba & Padmini)**.
-
----
-
-## 🎯 1. Instant Test Benchmark (Included in Repo)
-
-You do **not** need to download anything to test the system right now. A curated multimodal benchmark is pre-packaged in:
-📁 `data/sample_encounters.json`
-
-It contains 4 complete, realistic clinical cases:
-1. **Severe Community-Acquired Bacterial Pneumonia (RED):** Full multimodal alignment (CXR consolidation, leukocytosis on CBC, high fever, severe SpO2 desaturation).
-2. **Acute Pulmonary Embolism (RED - Conflict/Debate Case):** Clear CXR with profound tachycardia, hypoxia, and elevated D-dimer. Tests the **Doctor-Critic** and **Debate Engine** when imaging does not show obvious consolidation.
-3. **Moderate COPD Exacerbation (YELLOW):** Hyperinflation on CXR, wheezing, mild tachypnea without acute pneumonia.
-4. **Mild Viral Upper Respiratory Infection (GREEN):** Stable vitals, outpatient acuity.
+> [!IMPORTANT]
+> **DO NOT PAY FOR CITI PROGRAM OR ANY DATASET.**  
+> Individual learner fees on CITI are unnecessary. MIT and the clinical AI research community provide **100% free, open-access datasets** with zero paywalls and zero institutional requirements.
 
 ---
 
-## 🏆 2. The Golden Multimodal Dataset: MIMIC-IV & MIMIC-CXR
+## 🏆 1. The Official Open-Access "MIMIC-IV Demo" (Zero CITI, Zero Cost)
 
-The primary clinical benchmark for academic clinical AI systems is the **MIMIC** ecosystem hosted by MIT and PhysioNet.
+MIT and PhysioNet publish the official **MIMIC-IV Clinical Demo** and **MIMIC-IV-ED Demo**. These datasets have the **exact same table structures, schemas, and clinical features** as the full MIMIC database, but are completely open to the public:
+- **Zero credentialing required**
+- **Zero CITI training required**
+- **Zero payment**
+- **Size:** Under 10 MB compressed (perfect for a small laptop!)
 
-### Why MIMIC is the Gold Standard:
-- **Patient Linking:** `subject_id` and `stay_id` connect Chest X-rays, clinical notes, continuous vitals, and emergency triage.
-- **Real-World Triage:** Contains authentic emergency department acuity scores (ESI 1 through 5, directly mappable to RED, YELLOW, GREEN).
+### What it contains:
+* `triage.csv.gz`: Real emergency department triage vitals, temperature, SpO₂, and official triage acuity scores (ESI 1–5).
+* `edstays.csv.gz`: Real patient demographic entries, admission and discharge timestamps.
+* `vitalsign.csv.gz`: Real serial vital sign measurements during emergency stays.
 
-### Step-by-Step Acquisition Guide:
-1. **Create an account:** Register at [physionet.org](https://physionet.org/).
-2. **Complete CITI Training:**
-   - Go to [citiprogram.org](https://about.citiprogram.org/).
-   - Complete the free course: **"Data or Specimens Only Research"**.
-   - Download the Completion Certificate PDF.
-3. **Link Certificate on PhysioNet:**
-   - In your PhysioNet profile, submit your CITI certificate number.
-   - Approval takes 24–48 hours.
-4. **Sign the Data Use Agreement (DUA):**
-   - Click "Sign DUA" on [MIMIC-IV-ED](https://physionet.org/content/mimic-iv-ed/) and [MIMIC-CXR](https://physionet.org/content/mimic-cxr/).
-
----
-
-## 💾 3. Protecting Your Laptop Storage (Crucial Strategy)
-
-Raw MIMIC-CXR images exceed 5 Terabytes. **Do not download the entire dataset.**
-
-### Recommended Lightweight Slices:
-1. **`mimic-iv-ed/ed/triage.csv.gz` (~15 MB):** Contains vital signs at triage and official acuity scores.
-2. **`mimic-iv-ed/ed/edstays.csv.gz` (~10 MB):** Patient demographic data and admission/discharge times.
-3. **`mimic-cxr-reports.tar.gz` (~40 MB):** Radiologist-written diagnostic reports for all X-rays (plain text).
-4. **Subset of Images:** Download only the first **500–1,000 paired Chest X-rays** (in JPG format from `mimic-cxr-jpg`), consuming ~300 MB total.
+### How to download it in 1 command:
+```bash
+python scripts/download_datasets.py --source mimic-demo
+```
+This automatically fetches the official open-access files directly into `data/raw/mimic_demo/`.
 
 ---
 
-## 🌐 4. Instant Open-Access Alternatives (No CITI Wait)
+## 🔬 2. Free Open Datasets for Teammate Modules
 
-If you or your teammates want to train models immediately without waiting for credential approval:
+Every member can get production-quality, real-world clinical data completely free:
 
-| Component | Dataset | Link & Access | Size / Format |
+| Module & Owner | Recommended Free Dataset | Source & Link | Cost / License |
 | :--- | :--- | :--- | :--- |
-| **Vitals (Time-Series)** | **PhysioNet Sepsis Challenge 2019** | [PhysioNet 2019](https://physionet.org/content/challenge-2019/) | Open CSV / PSV files containing hourly HR, SpO2, SBP, RR. |
-| **Vision (CXR)** | **NIH ChestX-ray14 / CheXpert Sample** | [Kaggle NIH CXR](https://www.kaggle.com/datasets/nih-chest-xrays/data) | JPEG images with 14 pathology labels. |
-| **Clinical NLP (EHR)** | **MTSamples** | [Kaggle MTSamples](https://www.kaggle.com/datasets/tboyclk/medicaltranscriptions) | 5,000 clean transcribed doctor notes across 40 specialties. |
+| **Vision Agent**<br>(Sanjoli) | **NIH ChestX-ray14** or **Kaggle Chest X-Ray (Pneumonia)** | [Kaggle Chest X-ray Pneumonia](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) (1.2 GB)<br>or [NIH ChestX-ray14](https://www.kaggle.com/datasets/nih-chest-xrays/data) | **100% Free**<br>Direct 1-click download |
+| **EHR / Clinical NLP**<br>(Sanjoli) | **MTSamples (Medical Transcriptions)** | [Kaggle MTSamples](https://www.kaggle.com/datasets/tboyclk/medicaltranscriptions) (5,000 transcribed clinical notes across 40 specialties) | **100% Free**<br>Public Domain / Open |
+| **Vitals Agent**<br>(Sanjoli) | **PhysioNet Sepsis Challenge 2019** | Run `python scripts/download_datasets.py --source vitals` | **100% Free**<br>No login needed |
+| **Doctor-Critic & Triage**<br>(Ariba & Padmini) | **Pre-packaged AEGIS-NET Benchmark** | Built-in at [data/sample_encounters.json](file:///c:/Users/dell/OneDrive/Pictures/Screenshots/Aegis%20Net/data/sample_encounters.json) + MIMIC-IV-ED Demo | **100% Free**<br>Zero download needed |
+| **Multimodal Pairs**<br>(Shared) | **ROCO (Radiology Objects in Context)** | Hugging Face: `datasets.load_dataset("roco")` (80,000 medical image-caption pairs) | **100% Free**<br>Open Source |
 
 ---
 
-## 🛠️ 5. Running the Ingestion Script
-To fetch sample open vitals streams directly into your workspace:
-```bash
-python scripts/download_datasets.py --mode sample --count 20
-```
+## 💻 3. Protecting Your Laptop Storage & Hardware
 
-To display full MIMIC credential instructions at any time:
-```bash
-python scripts/download_datasets.py --mode mimic-guide
-```
+1. **Storage:** Keep raw image downloads below 1–2 GB. Use the sample benchmark `data/sample_encounters.json` for 90% of day-to-day development.
+2. **Compute:** Do not train heavy neural networks or VLMs directly on your laptop CPU. Use:
+   - **Google Colab** (Free T4 GPU, 15GB VRAM)
+   - **Kaggle Notebooks** (Free dual T4 GPUs, 30 hours free per week)
+   Export only the final lightweight adapter weights (`.pt` or `.safetensors`, ~50MB) to your local repo.
